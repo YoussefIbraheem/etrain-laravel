@@ -302,7 +302,7 @@
                 <div class="textimonial_iner owl-carousel">
                     
                         
-                    
+```                    
                             
                         @foreach ( $testimonials as $testimonial )
                         <div class="testimonial_slider">
@@ -324,6 +324,7 @@
                         </div>
                     </div>
                             @endforeach
+   ```
                                 {{-- <div class="col-xl-4 d-none d-xl-block">
                                     <div class="testimonial_slider_text">
                                         <p>Behold place was a multiply creeping creature his domin to thiren open void
