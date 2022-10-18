@@ -48,25 +48,29 @@
                                     <a class="nav-link" href="{{ url('/') }}">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="about.html">About</a>
+                                    <a class="nav-link" href="{{ url('/show_about') }}">About</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('/courses') }}">Courses</a>
-                                </li>
+                                
                                 <li class="nav-item">
                                     <a class="nav-link" href="blog.html">Blog</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Pages
+                                    <a class="nav-link dropdown-toggle" href=" {{ url("/courses") }} " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Courses
                                     </a>
+                                    
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="single-blog.html">Single blog</a>
-                                        <a class="dropdown-item" href="elements.html">Elements</a>
+                                        <a class="dropdown-item" href=" {{ url("/courses") }} ">All Courses</a>
+                                       <hr class="dropdown-divider">
+                                        @foreach ($showCategories as $category )
+                                        <a class="dropdown-item" href="{{ url("category/$category->id") }}">{{ $category->name }}</a>
+                                        @endforeach
+                                        
+                                        
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">Contact</a>
+                                    <a class="nav-link" href="{{ url('/contacts') }}">Contact</a>
                                 </li>
                                 <li class="d-none d-lg-block">
                                     <a class="btn_1" href="#">Get a Quote</a>

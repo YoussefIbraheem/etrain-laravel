@@ -20,14 +20,14 @@ class TestmonialSeeder extends Seeder
         $imgPath = public_path("front/img/testimonial");
         $imgs = collect(scandir($imgPath))->slice(2);
         $faker = Factory::create();
-        // for($i=1;$i<=5;$i++){
+         for($i=1;$i<=5;$i++){
             Testomnial::create([
                 "name"=>$faker->name(),
                 "spec"=>$faker->jobTitle(),
                 "desc"=>$faker->sentence(),
                 "image"=>$faker->randomElement($imgs)
             ]);
-        // }
+         }
         
     }
 }

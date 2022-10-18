@@ -102,36 +102,7 @@
 <!-- learning part end-->
 
 <!-- member_counter counter start -->
-<section class="member_counter">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-sm-6">
-                <div class="single_member_counter">
-                    <span class="counter">{{ $trainersCount }}</span>
-                    <h4>All Teachers</h4>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="single_member_counter">
-                    <span class="counter">{{ $studentsCount }}</span>
-                    <h4> All Students</h4>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="single_member_counter">
-                    <span class="counter">{{ $coursesCount }}</span>
-                    <h4>Courses</h4>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="single_member_counter">
-                    <span class="counter">{{ $categoryCount }}</span>
-                    <h4>Fields</h4>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+@include('front.inc.counters')
 <!-- member_counter counter end -->
 
 <!--::review_part start::-->
@@ -151,7 +122,7 @@
                 <div class="single_special_cource h-100 g-5">
                     <img src="{{asset("front/img/special_cource/$course->image")}}" class="special_img" alt="">
                     <div class="special_cource_text">
-                        <a href="course-details.html" class="btn_4">{{ $course->category->name }}</a>
+                        <a href="{{ url("category",$course->category->id) }}" class="btn_4">{{ $course->category->name }}</a>
                         <h4>{{ $course->price }} EG£</h4>
                         <a href="course-details.html"><h3>{{ $course->name }} Full Course</h3></a>
                         <p>{{ $course->brief_desc }}</p>
@@ -179,68 +150,6 @@
                 </div>
             </div>
             @endforeach
-            {{-- <div class="col-sm-6 col-lg-4">
-                <div class="single_special_cource">
-                    <img src="{{asset('front/img/special_cource_2.png')}}" class="special_img" alt="">
-                    <div class="special_cource_text">
-                        <a href="course-details.html" class="btn_4">design</a>
-                        <h4>$160.00</h4>
-                        <a href="course-details.html"> <h3>Web UX/UI Design </h3></a>
-                        <p>Which whose darkness saying were life unto fish wherein all fish of together called</p>
-                        <div class="author_info">
-                            <div class="author_img">
-                                <img src="{{asset('front/img/author/author_2.png')}}" alt="">
-                                <div class="author_info_text">
-                                    <p>Conduct by:</p>
-                                    <h5><a href="#">James Well</a></h5>
-                                </div>
-                            </div>
-                            <div class="author_rating">
-                                <div class="rating">
-                                    <a href="#"><img src="{{asset('front/img/icon/color_star.svg')}}" alt=""></a>
-                                    <a href="#"><img src="{{asset('front/img/icon/color_star.svg')}}" alt=""></a>
-                                    <a href="#"><img src="{{asset('front/img/icon/color_star.svg')}}" alt=""></a>
-                                    <a href="#"><img src="{{asset('front/img/icon/color_star.svg')}}" alt=""></a>
-                                    <a href="#"><img src="{{asset('front/img/icon/star.svg')}}" alt=""></a>
-                                </div>
-                                <p>3.8 Ratings</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div> --}}
-            {{-- <div class="col-sm-6 col-lg-4">
-                <div class="single_special_cource">
-                    <img src="{{asset('front/img/special_cource_3.png')}}" class="special_img" alt="">
-                    <div class="special_cource_text">
-                        <a href="course-details.html" class="btn_4">Wordpress</a>
-                        <h4>$140.00</h4>
-                        <a href="course-details.html">  <h3>Wordpress Development</h3> </a> 
-                        <p>Which whose darkness saying were life unto fish wherein all fish of together called</p>
-                        <div class="author_info">
-                            <div class="author_img">
-                                <img src="{{asset('front/img/author/author_3.png')}}" alt="">
-                                <div class="author_info_text">
-                                    <p>Conduct by:</p>
-                                    <h5><a href="#">James Well</a></h5>
-                                </div>
-                            </div>
-                            <div class="author_rating">
-                                <div class="rating">
-                                    <a href="#"><img src="{{asset('front/img/icon/color_star.svg')}}" alt=""></a>
-                                    <a href="#"><img src="{{asset('front/img/icon/color_star.svg')}}" alt=""></a>
-                                    <a href="#"><img src="{{asset('front/img/icon/color_star.svg')}}" alt=""></a>
-                                    <a href="#"><img src="{{asset('front/img/icon/color_star.svg')}}" alt=""></a>
-                                    <a href="#"><img src="{{asset('front/img/icon/star.svg')}}" alt=""></a>
-                                </div>
-                                <p>3.8 Ratings</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div> --}}
         </div>
     </div>
 </section>
@@ -287,129 +196,7 @@
 <!-- learning part end-->
 
 <!--::review_part start::-->
-<section class="testimonial_part">
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-xl-5">
-                <div class="section_tittle text-center">
-                    <p>tesimonials</p>
-                    <h2>Happy Students</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="textimonial_iner owl-carousel">
-                    
-                        
-                         ```                         
-                        @foreach ( $testimonials as $testimonial )
-                        <div class="testimonial_slider">
-                            <div class="row">
-                            @foreach ($testimonial as $singleTest )
-                        <div class="col-lg-8 col-xl-4 col-sm-8 align-self-center">
-                            <div class="testimonial_slider_text">
-                                <p>{{ $singleTest->desc }}</p>
-                                    <h4>{{ $singleTest->name }}</h4>
-                                    <h5> {{ $singleTest->spec }}</h5>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-xl-2 col-sm-4">
-                                <div class="testimonial_slider_img">
-                                    <img src="{{asset("front/img/testimonial/$singleTest->image")}}" alt="#">
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                            @endforeach
-                             ```
-                                {{-- <div class="col-xl-4 d-none d-xl-block">
-                                    <div class="testimonial_slider_text">
-                                        <p>Behold place was a multiply creeping creature his domin to thiren open void
-                                            hath herb divided divide creepeth living shall i call beginning
-                                            third sea itself set</p>
-                                            <h4>Michel Hashale</h4>
-                                            <h5> Sr. Web designer</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-2 d-none d-xl-block">
-                                        <div class="testimonial_slider_img">
-                                            <img src="{{asset('front/img/testimonial_img_1.png')}}" alt="#">
-                                        </div>
-                                    </div> --}}
-                           
-                         
-                            {{-- <div class="testimonial_slider">
-                                <div class="row">
-                            <div class="col-lg-8 col-xl-4 col-sm-8 align-self-center">
-                                <div class="testimonial_slider_text">
-                                    <p>Behold place was a multiply creeping creature his domin to thiren open void
-                                        hath herb divided divide creepeth living shall i call beginning
-                                        third sea itself set</p>
-                                    <h4>Michel Hashale</h4>
-                                    <h5> Sr. Web designer</h5>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-xl-2 col-sm-4">
-                                <div class="testimonial_slider_img">
-                                    <img src="{{asset('front/img/testimonial_img_2.png')}}" alt="#">
-                                </div>
-                            </div>
-                            <div class="col-xl-4 d-none d-xl-block">
-                                <div class="testimonial_slider_text">
-                                    <p>Behold place was a multiply creeping creature his domin to thiren open void
-                                        hath herb divided divide creepeth living shall i call beginning
-                                        third sea itself set</p>
-                                    <h4>Michel Hashale</h4>
-                                    <h5> Sr. Web designer</h5>
-                                </div>
-                            </div>
-                            <div class="col-xl-2 d-none d-xl-block">
-                                <div class="testimonial_slider_img">
-                                    <img src="{{asset('front/img/testimonial_img_1.png')}}" alt="#">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial_slider">
-                        <div class="row">
-                            <div class="col-lg-8 col-xl-4 col-sm-8 align-self-center">
-                                <div class="testimonial_slider_text">
-                                    <p>Behold place was a multiply creeping creature his domin to thiren open void
-                                        hath herb divided divide creepeth living shall i call beginning
-                                        third sea itself set</p>
-                                    <h4>Michel Hashale</h4>
-                                    <h5> Sr. Web designer</h5>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-xl-2 col-sm-4">
-                                <div class="testimonial_slider_img">
-                                    <img src="{{asset('front/img/testimonial_img_3.png')}}" alt="#">
-                                </div>
-                            </div>
-                            <div class="col-xl-4 d-none d-xl-block">
-                                <div class="testimonial_slider_text">
-                                    <p>Behold place was a multiply creeping creature his domin to thiren open void
-                                        hath herb divided divide creepeth living shall i call beginning
-                                        third sea itself set</p>
-                                    <h4>Michel Hashale</h4>
-                                    <h5> Sr. Web designer</h5>
-                                </div>
-                            </div>
-                            <div class="col-xl-2 d-none d-xl-block">
-                                <div class="testimonial_slider_img">
-                                    <img src="{{asset('front/img/testimonial_img_1.png')}}" alt="#">
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
+@include('front.inc.testmonials')
 <!--::blog_part end::-->
 
 <!--::blog_part start::-->

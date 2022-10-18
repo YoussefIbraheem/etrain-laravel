@@ -14,18 +14,25 @@
                     <h4>Newsletter</h4>
                     <p>Stay updated with our latest trends Seed heaven so said place winged over given forth fruit.
                     </p>
-                    <form action="#">
+                    <form action="{{ url('/newsletter') }}" method="post">
+                        @csrf
                         <div class="form-group">
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder='Enter email address'
+                                <input type="email" name="newsletterEmail" class="form-control" placeholder='Enter email address'
                                     onfocus="this.placeholder = ''"
                                     onblur="this.placeholder = 'Enter email address'">
                                 <div class="input-group-append">
-                                    <button class="btn btn_1" type="button"><i class="ti-angle-right"></i></button>
+                                    <button class="btn btn_1" type="submit"><i class="ti-angle-right"></i></button>
                                 </div>
                             </div>
                         </div>
                     </form>
+                    @if (session()->has('success'))
+                    {{session()->get('success')}}
+                    @endif
+                    @error('newsletterEmail')
+                       <div class="alert alert-danger text-center">{{ $message }}</div> 
+                    @enderror
                     <div class="social_icon">
                         <a href="#"> <i class="ti-facebook"></i> </a>
                         <a href="#"> <i class="ti-twitter-alt"></i> </a>
