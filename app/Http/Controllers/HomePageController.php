@@ -44,4 +44,5 @@ class HomePageController extends Controller
       return view('front.inc.contact')->with(['contactInfo'=>$contactInfo]);
    }
 
+ 
 }

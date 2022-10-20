@@ -32,11 +32,13 @@ public function category($id){
 
 }
 
-public function singlePage($c_id){
+public function showCourse($id){
 
-    $data['course'] = Course::select('*')->where('category_id',$c_id)->first();
+    $data['course'] = Course::select('*')->where('category_id',$id)->first();
     return view('front.inc.courseDetails')->with($data);
 
 }
+
+
 
 }

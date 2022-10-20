@@ -21,7 +21,7 @@ Route::get('/laravel', function () {
 Route::get('/',[HomePageController::class,'mainPage']);
 Route::get('/courses',[CourseController::class,'mainPage']);
 Route::get('/category/{id}',[CourseController::class,'category']);
-Route::get('/course/{c_id}',[CourseController::class,'singlePage']);
+Route::get('/course_details/{id}',[CourseController::class,'showCourse']);
 Route::get('/contacts',[HomePageController::class,'showContacts']);
 Route::post('/newsletter',[HomePageController::class,'newsletter']);
 Route::get('/show_about',[HomePageController::class,'showAbout']);

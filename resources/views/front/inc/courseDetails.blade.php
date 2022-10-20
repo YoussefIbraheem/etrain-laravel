@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('front.layout')
 @section('content')
 <section class="breadcrumb breadcrumb_bg">
     <div class="container">
@@ -7,7 +7,7 @@
                 <div class="breadcrumb_iner text-center">
                     <div class="breadcrumb_iner_item">
                         <h2>Course Details</h2>
-                        <p>Home<span>/</span>Course Details</p>
+                        <p>Home<span>/</span>Course Details<span>/</span>{{ $course->name }}</p>
                     </div>
                 </div>
             </div>
@@ -27,90 +27,7 @@
                 <div class="content_wrapper">
                     <h4 class="title_top">Objectives</h4>
                     <div class="content">
-                        When you enter into any new area of science, you almost always find yourself with a
-                        baffling new language of
-                        technical terms to learn before you can converse with the experts. This is certainly
-                        true in astronomy both in
-                        terms of terms that refer to the cosmos and terms that describe the tools of the trade,
-                        the most prevalent
-                        being the telescope.
-                        <br>
-                        <br>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                        ut aliquip ex ea
-                        commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum. Lorem ipsum dolor sit
-                        amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim
-                        ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat. Duis aute
-                        irure dolor in reprehenderit in voluptate velit esse cillum.
-                    </div>
-
-                    <h4 class="title">Eligibility</h4>
-                    <div class="content">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                        ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.
-                        <br>
-                        <br>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                        ut aliquip ex ea
-                        commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum. Lorem ipsum dolor sit
-                        amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim
-                        ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat. Duis aute
-                        irure dolor in reprehenderit in voluptate velit esse cillum.
-                    </div>
-
-                    <h4 class="title">Course Outline</h4>
-                    <div class="content">
-                        <ul class="course_list">
-                            <li class="justify-content-between align-items-center d-flex">
-                                <p>Introduction Lesson</p>
-                                <a class="btn_2 text-uppercase" href="#">View Details</a>
-                            </li>
-                            <li class="justify-content-between align-items-center d-flex">
-                                <p>Basics of HTML</p>
-                                <a class="btn_2 text-uppercase" href="#">View Details</a>
-                            </li>
-                            <li class="justify-content-between align-items-center d-flex">
-                                <p>Getting Know about HTML</p>
-                                <a class="btn_2 text-uppercase" href="#">View Details</a>
-                            </li>
-                            <li class="justify-content-between align-items-center d-flex">
-                                <p>Tags and Attributes</p>
-                                <a class="btn_2 text-uppercase" href="#">View Details</a>
-                            </li>
-                            <li class="justify-content-between align-items-center d-flex">
-                                <p>Basics of CSS</p>
-                                <a class="btn_2 text-uppercase" href="#">View Details</a>
-                            </li>
-                            <li class="justify-content-between align-items-center d-flex">
-                                <p>Getting Familiar with CSS</p>
-                                <a class="btn_2 text-uppercase" href="#">View Details</a>
-                            </li>
-                            <li class="justify-content-between align-items-center d-flex">
-                                <p>Introduction to Bootstrap</p>
-                                <a class="btn_2 text-uppercase" href="#">View Details</a>
-                            </li>
-                            <li class="justify-content-between align-items-center d-flex">
-                                <p>Responsive Design</p>
-                                <a class="btn_2 text-uppercase" href="#">View Details</a>
-                            </li>
-                            <li class="justify-content-between align-items-center d-flex">
-                                <p>Canvas in HTML 5</p>
-                                <a class="btn_2 text-uppercase" href="#">View Details</a>
-                            </li>
-                        </ul>
+                        {{ $course->full_desc }}
                     </div>
                 </div>
             </div>
@@ -122,13 +39,13 @@
                         <li>
                             <a class="justify-content-between d-flex" href="#">
                                 <p>Trainer’s Name</p>
-                                <span class="color">George Mathews</span>
+                                <span class="color">{{ $course->trainer->name }}</span>
                             </a>
                         </li>
                         <li>
                             <a class="justify-content-between d-flex" href="#">
                                 <p>Course Fee </p>
-                                <span>$230</span>
+                                <span>EGP {{ $course->price }}</span>
                             </a>
                         </li>
                         <li>
@@ -156,33 +73,33 @@
                             <div class="d-flex flex-row reviews justify-content-between">
                                 <span>Quality</span>
                                 <div class="rating">
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/star.svg" alt=""></a>
+                                        <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                        <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                        <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                        <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                        <a href="#"><img src="{{ asset('front/img/icon/star.svg')}}" alt=""></a>
                                     </div>
                                 <span>Outstanding</span>
                             </div>
                             <div class="d-flex flex-row reviews justify-content-between">
                                 <span>Puncuality</span>
                                 <div class="rating">
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/star.svg" alt=""></a>
+                                    <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                    <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                    <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                    <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                    <a href="#"><img src="{{ asset('front/img/icon/star.svg')}}" alt=""></a>
                                     </div>
                                 <span>Outstanding</span>
                             </div>
                             <div class="d-flex flex-row reviews justify-content-between">
                                 <span>Quality</span>
                                 <div class="rating">
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/star.svg" alt=""></a>
+                                    <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                    <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                    <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                    <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                    <a href="#"><img src="{{ asset('front/img/icon/star.svg')}}" alt=""></a>
                                     </div>
                                 <span>Outstanding</span>
                             </div>
@@ -207,11 +124,11 @@
                                         <h5><a href="#">Emilly Blunt</a>
                                         </h5>
                                         <div class="rating">
-                                            <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                            <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                            <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                            <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                            <a href="#"><img src="img/icon/star.svg" alt=""></a>
+                                             <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                        <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                        <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                        <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                        <a href="#"><img src="{{ asset('front/img/icon/star.svg')}}" alt=""></a>
                                         </div>
                                         <p class="comment">
                                             Blessed made of meat doesn't lights doesn't was dominion and sea earth
@@ -231,11 +148,11 @@
                                         <h5><a href="#">Elsie Cunningham</a>
                                         </h5>
                                         <div class="rating">
-                                            <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                            <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                            <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                            <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                            <a href="#"><img src="img/icon/star.svg" alt=""></a>
+                                             <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                        <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                        <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                        <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                        <a href="#"><img src="{{ asset('front/img/icon/star.svg')}}" alt=""></a>
                                         </div>
                                         <p class="comment">
                                             Blessed made of meat doesn't lights doesn't was dominion and sea earth
@@ -255,11 +172,11 @@
                                         <h5><a href="#">Maria Luna</a>
                                         </h5>
                                         <div class="rating">
-                                            <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                            <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                            <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                            <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                            <a href="#"><img src="img/icon/star.svg" alt=""></a>
+                                             <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                        <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                        <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                        <a href="#"><img src="{{ asset('front/img/icon/color_star.svg')}}" alt=""></a>
+                                        <a href="#"><img src="{{ asset('front/img/icon/star.svg')}}" alt=""></a>
                                         </div>
                                         <p class="comment">
                                             Blessed made of meat doesn't lights doesn't was dominion and sea earth

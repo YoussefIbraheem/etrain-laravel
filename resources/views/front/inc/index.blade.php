@@ -124,7 +124,7 @@
                     <div class="special_cource_text">
                         <a href="{{ url("category",$course->category->id) }}" class="btn_4">{{ $course->category->name }}</a>
                         <h4>{{ $course->price }} EG£</h4>
-                        <a href="course-details.html"><h3>{{ $course->name }} Full Course</h3></a>
+                        <a href="{{ url("/course_details/$course->id") }}"><h3>{{ $course->name }} Full Course</h3></a>
                         <p>{{ $course->brief_desc }}</p>
                         <div class="author_info">
                             <div class="author_img">
