@@ -44,5 +44,8 @@ class HomePageController extends Controller
       return view('front.inc.contact')->with(['contactInfo'=>$contactInfo]);
    }
 
+   public function showBlog(){
+      return view('front.inc.blog');
+   }
  
 }

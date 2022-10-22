@@ -34,7 +34,7 @@ public function category($id){
 
 public function showCourse($id){
 
-    $data['course'] = Course::select('*')->where('category_id',$id)->first();
+    $data['course'] = Course::select('*')->where('id',$id)->first();
     return view('front.inc.courseDetails')->with($data);
 
 }

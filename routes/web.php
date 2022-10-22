@@ -25,3 +25,4 @@ Route::get('/course_details/{id}',[CourseController::class,'showCourse']);
 Route::get('/contacts',[HomePageController::class,'showContacts']);
 Route::post('/newsletter',[HomePageController::class,'newsletter']);
 Route::get('/show_about',[HomePageController::class,'showAbout']);
+route::get('/show_blog',[HomePageController::class,'showBlog']);
