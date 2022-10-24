@@ -25,9 +25,14 @@
   <!-- ================ contact section start ================= -->
   <section class="contact-section section_padding">
     <div class="container">
-      <div class="d-none d-sm-block mb-5 pb-4">
-        {{!! $contactInfo->location !!}} 
+     <div class="row">
+
+      <div class="col-12 text-center">
+         <div class="d-none w-100 d-sm-block mb-5 pb-4">
+          {!! $contactInfo->location !!} 
+         </div>
       </div>
+     </div>
 
 
       <div class="row">

@@ -30,14 +30,12 @@
                     @if (session()->has('success'))
                     {{session()->get('success')}}
                     @endif
-                    @error('newsletterEmail')
-                       <div class="alert alert-danger text-center">{{ $message }}</div> 
-                    @enderror
+                    @include('front.errors')
                     <div class="social_icon">
-                        <a href="#"> <i class="ti-facebook"></i> </a>
-                        <a href="#"> <i class="ti-twitter-alt"></i> </a>
-                        <a href="#"> <i class="ti-instagram"></i> </a>
-                        <a href="#"> <i class="ti-skype"></i> </a>
+                        <a href="{{ $footerDetails->facebook }}"> <i class="ti-facebook"></i> </a>
+                        <a href="{{ $footerDetails->twitter }}"> <i class="ti-twitter-alt"></i> </a>
+                        <a href="{{ $footerDetails->instagram }}"> <i class="ti-instagram"></i> </a>
+                        <a href="{{ $footerDetails->skype }}"> <i class="ti-skype"></i> </a>
                     </div>
                 </div>
             </div>
@@ -45,9 +43,9 @@
                 <div class="single-footer-widget footer_2">
                     <h4>Contact us</h4>
                     <div class="contact_info">
-                        <p><span> Address :</span> Hath of it fly signs bear be one blessed after </p>
-                        <p><span> Phone :</span> +2 36 265 (8060)</p>
-                        <p><span> Email : </span>info@colorlib.com </p>
+                        <p><span> Address :</span> {{ $footerDetails->address }} </p>
+                        <p><span> Phone :</span> {{ $footerDetails->phone }}</p>
+                        <p><span> Email : </span>{{ $footerDetails->email }} </p>
                     </div>
                 </div>
             </div>

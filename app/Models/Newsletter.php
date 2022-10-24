@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Newsletter extends Model
-{
+{protected $guarded = ['id'];
     use HasFactory;
     protected $fillable = ['email'];
 }

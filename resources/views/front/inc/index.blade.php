@@ -7,12 +7,9 @@
             <div class="col-lg-6 col-xl-6">
                 <div class="banner_text">
                     <div class="banner_text_iner">
-                        <h5>Every child yearns to learn</h5>
-                        <h1>Making Your Childs
-                            World Better</h1>
-                        <p>Replenish seasons may male hath fruit beast were seas saw you arrie said man beast whales
-                            his void unto last session for bite. Set have great you'll male grass yielding yielding
-                            man</p>
+                        <h5>{{ json_decode($banner->content)->sub_title }}</h5>
+                        <h1>{{ json_decode($banner->content)->title }}</h1>
+                        <p>{{ json_decode($banner->content)->desc }}</p>
                         <a href="#" class="btn_1">View Course </a>
                         <a href="#" class="btn_2">Get Started </a>
                     </div>

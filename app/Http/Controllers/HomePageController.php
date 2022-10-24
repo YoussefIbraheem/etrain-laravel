@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Contact;
+use App\Models\Content;
 use App\Models\Course;
 use App\Models\Newsletter;
 use App\Models\Student;
@@ -20,6 +21,7 @@ class HomePageController extends Controller
     for($i=0;$i<=(Testomnial::count()/2);$i++){
        $testimonials[]= Testomnial::select('*')->orderBy('id','desc')->offset($i*2)->take(2)->get();
     }
+    $data['banner'] = Content::where('name','banner')->first();
     $data['coursesCount'] = Course::count();
     $data['trainersCount'] = Trainer::count();
     $data['studentsCount'] = Student::count();
@@ -47,5 +49,8 @@ class HomePageController extends Controller
    public function showBlog(){
       return view('front.inc.blog');
    }
+
+
+   
  
 }

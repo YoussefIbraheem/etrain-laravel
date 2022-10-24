@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Etrain</title>
-    <link rel="icon" href="{{asset('front/img/favicon.png')}}">
+    <link rel="icon" href="{{asset("front/img/$footerDetails->favicon")}}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{asset('front/css/bootstrap.min.css')}}">
     <!-- animate CSS -->
@@ -28,6 +28,7 @@
 </head>
 
 <body>
+    
     <!--::header part start::-->
     <header class="main_menu home_menu">
         <div class="container">
@@ -66,7 +67,7 @@
                                         <a class="dropdown-item" href="{{ url("category/$category->id") }}">{{ $category->name }}</a>
                                         @endforeach
                                         
-                                        
+                                       
                                     </div>
                                 </li>
                                 <li class="nav-item">
