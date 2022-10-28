@@ -69,6 +69,12 @@
               <button type="submit" class="button button-contactForm btn_1">Send Message</button>
             </div>
           </form>
+          @if (session()->has('success'))
+                    <ul class="alert alert-success list-unstyled">
+                       <li>{{session()->get('success')}}</li> 
+                    </ul>
+                    @endif
+                    @include('front.errors')
         </div>
         <div class="col-lg-4">
           <div class="media contact-info">

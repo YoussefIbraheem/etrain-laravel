@@ -62,7 +62,10 @@
                         </li>
 
                     </ul>
-                    <a href="#" class="btn_1 d-block">Enroll the course</a>
+                    <button type="button" class="btn_1 d-block w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Enroll Now
+                      </button>
+                      @include('front.errors')
                 </div>
 
                 <h4 class="title">Reviews</h4>
@@ -191,6 +194,43 @@
             </div>
         </div>
     </div>
-</section>
+{{-- Enroll Modal --}}
+<!-- Button trigger modal -->
+  
+  <!-- Modal -->
+  <div class="modal my-5 fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Applicant Information:</h1>
+          <button type="button" class="btn-close btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">X</button>
+        </div>
+    <form method="POST" action="{{ url('/enroll') }}">  
+       <div class="modal-body">
+              <div  class="form-group m-3">
+                  <input type="text" name="name" class="form-control" placeholder="Student Full Name">
+              </div>
+              <div  class="form-group m-3">
+                  <input type="email" name="email" class="form-control" placeholder="Student Email">
+              </div>
+              <div  class="form-group m-3">
+                  <input type="text" name="phone" class="form-control" placeholder="Student Phone">
+              </div>
+              <div  class="form-group m-3">
+                  <input type="text" name="spec" class="form-control" placeholder="Studnet Specialty">
+              </div>
+              <div  class="form-group m-3">
+                  <input type="hidden" name="course_id" value="{{ $course->id }}" class="form-control" placeholder="Studnet Specialty">
+              </div>
+                  @csrf
+      </div>
+      <div class="modal-footer">
+            <button class="btn_1 d-block" type="submit">Enroll Now</button>
+      </div>
+    </form>
+      </div>
+    </div>
+  </div>
+</section> 
 <!--================ End Course Details Area =================-->
 @endsection

@@ -41,7 +41,7 @@
             
             <div class="col-sm-6 col-lg-4">
                 <div class="single_special_cource m-2 g-2">
-                    <img src="{{asset("front/img/special_cource/$course->image")}}" class="special_img" alt="">
+                    <img src="{{asset("storage/$course->image")}}" class="special_img" alt="">
                     <div class="special_cource_text">
                         <a href="{{ url("category",$course->category->id) }}" class="btn_4">{{ $course->category->name}}</a>
                         <h4>{{ $course->price}} EGP</h4>

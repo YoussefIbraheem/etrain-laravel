@@ -74,7 +74,7 @@
                                     <a class="nav-link" href="{{ url('/contacts') }}">Contact</a>
                                 </li>
                                 <li class="d-none d-lg-block">
-                                    <a class="btn_1" href="#">Get a Quote</a>
+                                    <a class="btn_1" href="{{ url('/dashboard/login') }}">Employee Login</a>
                                 </li>
                             </ul>
                         </div>

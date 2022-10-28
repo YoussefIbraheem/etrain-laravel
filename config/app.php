@@ -196,6 +196,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\CategoriesServiceProvider::class,
         App\Providers\FooterServiceProvider::class,
+        App\Providers\TrainerServiceProvider::class,
 
     ],
 

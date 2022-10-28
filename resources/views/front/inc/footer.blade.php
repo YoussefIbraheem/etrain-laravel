@@ -28,7 +28,9 @@
                         </div>
                     </form>
                     @if (session()->has('success'))
-                    {{session()->get('success')}}
+                    <ul class="alert alert-success list-unstyled">
+                       <li>{{session()->get('success')}}</li> 
+                    </ul>
                     @endif
                     @include('front.errors')
                     <div class="social_icon">
@@ -76,7 +78,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <!-- popper js -->
 <script src="{{asset('front/js/popper.min.js')}}"></script>
 <!-- bootstrap js -->
+<script src="{{asset('front/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('front/js/bootstrap.min.js')}}"></script>
+
 <!-- easing js -->
 <script src="{{asset('front/js/jquery.magnific-popup.js')}}"></script>
 <!-- swiper js -->

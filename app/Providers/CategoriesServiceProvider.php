@@ -34,13 +34,7 @@ class CategoriesServiceProvider extends ServiceProvider
     { 
         
         View::composer('*', function ($view) {
-            $testimonials=[];
-        $data['testimonialCount'] = (Testomnial::count());
-    for($i=0;$i<=(Testomnial::count()/2);$i++){
-       $testimonials[]= Testomnial::select('*')->orderBy('id','desc')->offset($i*2)->take(2)->get();
-    }
-   
-            $view->with(['showCategories'=>Category::all(),'testimonials'=>$testimonials]);
+            $view->with(['showCategories'=>Category::all()]);
         });
     }
 }
