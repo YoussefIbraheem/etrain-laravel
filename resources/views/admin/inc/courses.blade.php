@@ -9,6 +9,7 @@
   Add Course
 </button>
 @include('front.errors')
+@include('front.success')
       </div>
       <div class="col-12">
         <table class="table table-hover">
@@ -21,6 +22,7 @@
               <th scope="col">brief_desc</th>
               <th scope="col">full_desc</th>
               <th scope="col">price</th>
+              <th scope="col">Available Seats</th>
               <th scope="col">image</th>
             </tr>
           </thead>
@@ -36,7 +38,8 @@
               <td><textarea disabled name="" id="" cols="30" rows="5">{{ $course->brief_desc }}</textarea></td>
               <td><textarea disabled name="" id="" cols="30" rows="10">{{ $course->full_desc }}</textarea></td>
               <td>{{ $course->price }}</td>
-              <td><img style=" border-radius:5px; width:100px; height:80px" src="{{ asset("storage/$course->image") }}" alt=""></td>
+              <td>{{ $course->number_of_students }}</td>
+              <td><img style=" border-radius:5px; width:100px; height:80px" src="{{ asset("storage/img/special_cource/$course->image") }}" alt=""></td>
               <td>
                 <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#updateCourseModal{{ $course->id }}">
                   Update
@@ -84,6 +87,7 @@
           @endforeach
         </select>
         <input class="form-control my-3" type="text" name="price" id="" placeholder="Course Price">
+        <input class="form-control my-3" type="text" name="number_of_students" id="" placeholder="Number Of Seats">
         <textarea class="form-control my-3" name="brief_desc" id="" cols="30" rows="10"></textarea>
         <textarea class="form-control my-3" name="full_desc" id="" cols="30" rows="10"></textarea>
         <input class="form-control my-3" type="file" name="image" id="" placeholder="Course Picture">
@@ -112,18 +116,19 @@
         <input value="{{ $course->name }}" class="form-control my-3" type="text" name="nameEdit" id="" placeholder="Course Name">
         {{-- category selection --}}
         <select class="form-control my-3" name="categoryEdit" id="">
-          <option disabled selected hidden value="{{ $course->category->id }}">{{ $course->category->name }}</option>
+          <option selected hidden value="{{ $course->category->id }}">{{ $course->category->name }}</option>
           @foreach ($showCategories as $categroy )
             <option value="{{ $categroy->id }}">{{ $categroy->name }}</option>
           @endforeach
         </select>
         {{-- category selection --}}
         <select class="form-control my-3" placeholder="Select" name="trainerEdit" id="">
-          <option disabled selected hidden value="{{ $course->trainer->id }}">{{ $course->trainer->name }}</option>
+          <option  selected hidden value="{{ $course->trainer->id }}">{{ $course->trainer->name }}</option>
           @foreach ($trainerList as $trainer)
             <option value="{{ $trainer->id }}">{{ $trainer->name }}</option>
           @endforeach
         </select>
+        <input class="form-control my-3" value="{{ $course->number_of_students }}" type="text" name="seatsEdit" id="" placeholder="Number Of Seats">
         <input value="{{ $course->price }}" class="form-control my-3" type="text" name="priceEdit" id="" placeholder="Price">
         <textarea  class="form-control my-3" name="brief_descEdit" id="" cols="30" rows="10">{{ $course->brief_desc }}</textarea>
         <textarea  class="form-control my-3" name="full_descEdit" id="" cols="30" rows="10">{{ $course->full_desc }}</textarea>

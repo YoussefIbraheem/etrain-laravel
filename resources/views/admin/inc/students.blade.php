@@ -4,12 +4,13 @@
     <div class="">
       <div class="row">
         <div class="col-12">
+          @include('front.errors')
+          @include('front.success')
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addstudentModal">
                 Add Student
               </button>
         </div>
         <div class="col-12 d-flex justify-content-center">
-            @include('front.errors')
         </div>
         <div class="col-12">
             <table class="table table-hover">
@@ -20,6 +21,8 @@
                       <th scope="col">Email</th>
                       <th scope="col">spec</th>
                       <th scope="col">phone</th>
+                      <th scope="col">course</th>
+                      <th scope="col">status</th>
                       <th scope="col">Update</th>
                       <th scope="col">Delete</th>
                     </tr>
@@ -32,6 +35,11 @@
                       <td>{{ $student->email }}</td>
                       <td>{{ $student->spec }}</td>
                       <td>{{ $student->phone }}</td>
+                      
+                      @foreach ( $student->courses as $studentInfo )
+                      <td>{{ $studentInfo->name }}</td>
+                      <td>{{ $studentInfo->pivot->status}}</td>
+                      @endforeach
                       <td>
                         <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#updateStudentModal{{ $student->id }}">
                             Update
@@ -73,6 +81,12 @@
           <input class="form-control my-3" type="text" name="name" id="" placeholder="Student Name">
           <input class="form-control my-3" type="email" name="email" id="" placeholder="Studnet Email">
           <input class="form-control my-3" type="text" name="phone" id="" placeholder="Studnet phone">
+          <select class="form-control my-3"  name="course_id" id="">
+            <option hidden selected disabled value="">--select Course--</option>
+            @foreach ($showCourses as $course )
+              <option value="{{ $course->id }}">{{ $course->name }}</option>
+            @endforeach
+          </select>
           <input class="form-control my-3" type="text" name="spec" id="" placeholder="Studnet Spcialty">
          
         </div>
@@ -101,7 +115,19 @@
           <input value="{{ $student->phone }}" class="form-control my-3" type="text" name="phoneEdit" id="" placeholder="Student Phone">
           <input value="{{ $student->email }}" class="form-control my-3" type="email" name="emailEdit" id="" placeholder="Student Email">
           <input value="{{ $student->spec }}" class="form-control my-3" type="text" name="specEdit" id="" placeholder="Student Specialty">
-          
+          @foreach ( $student->courses as $studentInfo )
+            <select class="form-control my-3" name="courseEdit" id=""> 
+              <option selected hidden value="{{ $studentInfo->course_id }}">{{ $studentInfo->name }}</option>
+              @foreach ( $showCourses as $course)
+                <option value="{{ $course->id }}">{{ $course->name }}</option>
+              @endforeach
+            </select>
+            <select class="form-control my-3" name="statusEdit" id=""> 
+              <option selected hidden value="{{ $studentInfo->pivot->status }}">{{ $studentInfo->pivot->status }}</option>
+                <option value="approved">approved</option>
+                <option value="approved">rejected</option>
+            </select>
+            @endforeach
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

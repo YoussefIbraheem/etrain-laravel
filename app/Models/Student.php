@@ -10,6 +10,6 @@ class Student extends Model
     use HasFactory;
     protected $guarded = ['id'];
     public function courses(){
-        return $this->belongsToMany(Course::class);
+        return $this->belongsToMany(Course::class,'courses_students')->withPivot('course_id','student_id','status');
     }
 }

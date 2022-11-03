@@ -9,6 +9,7 @@
   Add Trainer
 </button>
 @include('front.errors')
+@include('front.success')
       </div>
       <div class="col-12">
         <table class="table table-hover">
@@ -34,7 +35,7 @@
               <td>{{ $trainer->email }}</td>
               <td>{{ $trainer->phone }}</td>
               <td>{{ $trainer->spec }}</td>
-              <td><img class="w-50" src="{{ asset("storage/$trainer->profile_pic") }}" alt=""></td>
+              <td><img class="w-50" src="{{ asset("storage/img/author/$trainer->profile_pic") }}" alt=""></td>
               <td>
                 <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#updateTrainerModal{{ $trainer->id }}">
                   Update

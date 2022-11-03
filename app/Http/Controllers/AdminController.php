@@ -3,22 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Message;
+use App\Models\Student;
 use App\Models\Trainer;
 use App\Models\Category;
-use App\Models\Student;
+use App\Mail\ResponseMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
+    // MAIN FUNCTIONS
     public function index(){
         return view('admin.inc.index');
     }
 
 
     public function login(){
-        return view('admin.inc.login');
+        if(Auth::guard('admin')->check()){
+          return redirect(url('dashboard/'));
+        }else{
+            return view('admin.inc.login');
+        }
     }
 
 
@@ -40,6 +50,7 @@ class AdminController extends Controller
         return redirect(route('front.inc.index'));
     }
 
+    //Categories functions
     public function showCategories(){
         $categories = Category::all();
         return view('admin.inc.categories',compact('categories'));
@@ -48,12 +59,14 @@ class AdminController extends Controller
     public function addCategory(Request $request){
         $data = $request->validate(['name'=>'required|string|max:121']);
         Category::create($data);
+        session()->flash('success',"Category Added Successfully");
         return redirect()->back();
     }
 
     public function deleteCategory($id){
         $category = Category::findOrFail($id);
         $category->delete();
+        session()->flash('success',"Category Deleted Successfully");
         return redirect()->back();
     }
 
@@ -61,9 +74,11 @@ class AdminController extends Controller
         $data = $request->validate(['nameEdit'=>'required|string|max:121']);
         $category = Category::findOrFail($id);
         $category->update(['name'=>$data['nameEdit']]);
+        session()->flash('success',"Category Updated Successfully");
         return redirect()->back();
     }
 
+    //Trainers functions
     public function showTrainers(){
         $trainers = Trainer::all();
         return view('admin.inc.trainers',compact('trainers'));
@@ -77,7 +92,9 @@ class AdminController extends Controller
             'spec'=>'required|string|max:121',
             'profile_pic'=>'required|image|mimes:jpg,png,jpeg',
         ]);
-        $data['profile_pic']= Storage::put('img/author', $request->profile_pic);
+        $newImgName = $data['profile_pic']->hashName();
+        Image::make($data['profile_pic'])->resize(1024,512)->save(public_path('storage/img/author/'.$newImgName));
+        $data['profile_pic'] = $newImgName;
         Trainer::create(
             [
                 'name'=>$data['name'],
@@ -88,12 +105,14 @@ class AdminController extends Controller
                 
             ]
         );
+        session()->flash('success',"Trainer Added Successfully");
         return redirect()->back();
     }
 
     public function deleteTrainer($id){
         $category = Trainer::findOrFail($id);
         $category->delete();
+        session()->flash('success',"Trainer Deleted Successfully");
         return redirect()->back();
     }
 
@@ -108,8 +127,10 @@ class AdminController extends Controller
             ]);
         $trainer = Trainer::findOrFail($id);
         if($request->has('picEdit')){
-            Storage::delete($trainer->profile_pic);
-            $data['picEdit']=Storage::put('img/author', $request->picEdit);
+            Storage::delete('img/author/'.$trainer->profile_pic);
+            $newImgName = $data['picEdit']->hashName();
+            Image::make($data['picEdit'])->resize(1024,512)->save(public_path('storage/img/author/'.$newImgName));
+            $data['picEdit'] = $newImgName;
         }else{
             $data['picEdit'] = $trainer->profile_pic;
         }
@@ -121,12 +142,19 @@ class AdminController extends Controller
             'profile_pic'=>$data['picEdit']
             
     ]);
+    session()->flash('success',"Trainer Updated Successfully");
         return redirect()->back();
     }
 
+    //Courses functions
 
     public function showCourses(){
         $courses = Course::all();
+
+        foreach ( $courses as  $course) {
+            $appliedStudents = Course::join('courses_students','courses.id','=','courses_students.course_id')->where('courses_students.course_id','=',$course->id)->count();
+            // $course->update(['number_of_students'=>($course->number_of_students - $appliedStudents)]);
+        }
         return view('admin.inc.courses',compact('courses'));
     }
 
@@ -134,13 +162,16 @@ class AdminController extends Controller
         $data = $request->validate([
             'name'=>'required|string|max:121',
             'price'=>'required|string|max:121',
+            'number_of_students'=>'required|numeric|max:15',
             'category'=>'required|string|max:121|exists:categories,id',
             'trainer'=>'required|string|max:121|exists:trainers,id',
             'brief_desc'=>'required|string|max:121',
             'full_desc'=>'required|string',
             'image'=>'required|image|mimes:jpg,png,jpeg',
         ]);
-        $data['image']= Storage::put('img/special_cource', $request->image);
+        $newImgName = $data['image']->hashName();
+        Image::make($data['image'])->resize(1024,512)->save(public_path('storage/img/special_cource/'.$newImgName));
+        $data['image'] = $newImgName;
         Course::create(
             [
                 'name'=>$data['name'],
@@ -150,15 +181,18 @@ class AdminController extends Controller
                 'brief_desc'=>$data['brief_desc'],
                 'full_desc'=>$data['full_desc'],
                 'image'=>$data['image'],
+                'number_of_students'=>$data['number_of_students'],
                 
             ]
         );
+        session()->flash('success',"Course Added Successfully");
         return redirect()->back();
     }
 
     public function deleteCourse($id){
         $course = Course::findOrFail($id);
         $course->delete();
+        session()->flash('success',"Course Deleted Successfully");
         return redirect()->back();
     }
 
@@ -172,11 +206,14 @@ class AdminController extends Controller
                 'brief_descEdit'=>'required|string|max:121',
                 'full_descEdit'=>'required|string',
                 'imageEdit'=>'image|mimes:jpg,png,jpeg',
+                'seatsEdit'=>'required|numeric|max:15'
             ]);
         $course = Course::findOrFail($id);
         if($request->has('imageEdit')){
-            Storage::delete($course->profile_pic);
-            $data['imageEdit']=Storage::put('img/special_cource', $request->imageEdit);
+            Storage::delete('img/special_cource/'.$course->image);
+            $newImgName = $data['imageEdit']->hashName();
+            Image::make($data['imageEdit'])->resize(1024,512)->save(public_path('storage/img/special_cource/'.$newImgName));
+            $data['imageEdit'] = $newImgName;
         }else{
             $data['imageEdit'] = $course->image;
         }
@@ -188,14 +225,18 @@ class AdminController extends Controller
             'brief_desc'=>$data['brief_descEdit'],
             'full_desc'=>$data['full_descEdit'],
             'image'=>$data['imageEdit'],
+            'number_of_students'=>$data['seatsEdit']
             
     ]);
+       session()->flash('success',"Course Updated Successfully");
         return redirect()->back();
     }
 
+        //Students functions
+
     public function showStudents() {
         $students = Student::paginate(10);
-        return view('admin.inc.students',compact('students'));
+        return view('admin.inc.students')->with(['students'=>$students]);
 
     }
 
@@ -204,18 +245,37 @@ class AdminController extends Controller
             'name'=>'required|string|max:121',
             'phone'=>'required|string|max:121',
             'email'=>'required|string|max:121|email|unique:students,email',
+            'course_id'=>'required|string|max:121|exists:courses,id',
             'spec'=>'required|string|max:121',
+
         ]);
-        Student::create(
-            [
-                'name' =>$data['name'],
-                'phone'=>$data['phone'],
-                'email'=>$data['email'],
-                'spec'=>$data['spec'],
-                
-            ]
-        );
-        return redirect()->back();
+        $course = Course::findOrFail($data['course_id']);
+        if($course->number_of_students > 0){
+            $student=Student::create(
+                [
+                    'name' =>$data['name'],
+                    'phone'=>$data['phone'],
+                    'email'=>$data['email'],
+                    'spec'=>$data['spec'],
+                    
+                ]
+            );
+            $course->update(['number_of_students'=>($course->number_of_students - 1)]);
+            $student_id = $student->id;
+            DB::table('courses_students')->insert([
+                'course_id'=>$data['course_id'],
+                'student_id'=> $student_id,
+                'created_at'=> now(),
+                'updated_at'=>now()
+            ]);
+    
+            session()->flash('success',"Student Added Successfully");
+            return redirect()->back();
+
+        }else{
+            return redirect()->back()->withErrors('No seats available in this course');
+        }
+        
     }
 
 
@@ -226,7 +286,9 @@ class AdminController extends Controller
                 'nameEdit'=>'required|string|max:121',
                 'phoneEdit'=>'required|string|max:121',
                 'emailEdit'=>'required|max:121|email|unique:students,email,'.$student->email.',email',
-                'specEdit'=>'required|string|max:121'
+                'specEdit'=>'required|string|max:121',
+                'courseEdit'=>'required|exists:courses,id',
+                'statusEdit'=>'required'
             ]);
         
         $student->update([
@@ -235,13 +297,36 @@ class AdminController extends Controller
                 'email'=>$data['emailEdit'],
                 'spec'=>$data['specEdit'],   
     ]);
+
+    DB::table('courses_students')->where('student_id','=',$student->id)->update([
+        'course_id'=>$data['courseEdit'],'status'=>$data['statusEdit']]);
+
+        session()->flash('success',"Student Updated Successfully");
         return redirect()->back();
     }
 
     public function deleteStudent($id){
         $student = Student::findOrFail($id);
         $student->delete();
+        session()->flash('success',"Student Deleted Successfully");
         return redirect()->back();
+    }
+    //Mails functions
+    public function showMessages(){
+        $messages = Message::all();
+        return view('admin.inc.messages')->with(['messages'=>$messages]);
+    }
+
+    public function sendMail( Request $request, $id){
+        $data = $request->validate([
+            'subject'=>'required',
+            'message'=>'required'
+        ]);
+        $message = Message::findOrFail($id);
+        Mail::to($message->email)->send(new ResponseMail($data , $message ));
+        session()->flash('success',"Message Sent Successfully");
+        return redirect()->back();
+
     }
 
 }

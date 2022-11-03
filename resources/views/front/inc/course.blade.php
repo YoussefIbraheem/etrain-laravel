@@ -41,7 +41,7 @@
             
             <div class="col-sm-6 col-lg-4">
                 <div class="single_special_cource m-2 g-2">
-                    <img src="{{asset("storage/$course->image")}}" class="special_img" alt="">
+                    <img src="{{asset("storage/img/special_cource/$course->image")}}" class="special_img" alt="">
                     <div class="special_cource_text">
                         <a href="{{ url("category",$course->category->id) }}" class="btn_4">{{ $course->category->name}}</a>
                         <h4>{{ $course->price}} EGP</h4>
@@ -51,7 +51,7 @@
                         <p>{{ $course->brief_desc}}</p>
                         <div class="author_info">
                             <div class="author_img">
-                                <img src="{{ asset("front/img/author"."/".$course->trainer->profile_pic) }}" alt="">
+                                <img style="width: 50px; border-radius:50%; height:50px;" src="{{ asset("storage/img/author"."/".$course->trainer->profile_pic) }}" alt="">
                                 <div class="author_info_text">
                                     <p>Conduct by:</p>
                                     <h5><a href="#">{{ $course->trainer->name}}</a></h5>

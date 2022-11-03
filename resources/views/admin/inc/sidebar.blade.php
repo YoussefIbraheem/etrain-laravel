@@ -30,5 +30,12 @@
           <span class="menu-title">Students</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url('dashboard/show_messages') }}">
+          <i class="icon-grid ti-email"></i>
+          <span class="menu-title">Messages</span>
+        </a>
+      </li>
     </ul>
   </nav>
+  

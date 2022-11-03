@@ -73,7 +73,7 @@
         <div class="row align-items-sm-center align-items-lg-stretch">
             <div class="col-md-7 col-lg-7">
                 <div class="learning_img">
-                    <img src="{{asset('front/img/learning_img.png')}}" alt="">
+                    <img src="{{asset('storage/img/learning_img.png')}}" alt="">
                 </div>
             </div>
             <div class="col-md-5 col-lg-5">
@@ -117,7 +117,7 @@
             @foreach ($courses as $course ) 
             <div class="col-sm-6 col-lg-4">
                 <div class="single_special_cource h-100 g-5">
-                    <img src="{{asset("storage/$course->image")}}" class="special_img" alt="">
+                    <img src="{{asset("storage/img/special_cource/$course->image")}}" class="special_img" alt="">
                     <div class="special_cource_text">
                         <a href="{{ url("category",$course->category->id) }}" class="btn_4">{{ $course->category->name }}</a>
                         <h4>{{ $course->price }} EG£</h4>
@@ -125,7 +125,7 @@
                         <p>{{ $course->brief_desc }}</p>
                         <div class="author_info">
                             <div class="author_img">
-                                <img src="{{asset("front/img/author/",$course->trainer->profile_pic)}}" alt="">
+                                <img style="width: 50px; border-radius:50%; height:50px;" src="{{asset("storage/img/author"."/".$course->trainer->profile_pic)}}" alt="">
                                 <div class="author_info_text">
                                     <p>Conduct by:</p>
                                     <h5><a href="#">{{ $course->trainer->name }}</a></h5>
@@ -133,11 +133,11 @@
                             </div>
                             <div class="author_rating">
                                 <div class="rating">
-                                    <a href="#"><img src="{{asset('front/img/icon/color_star.svg')}}" alt=""></a>
-                                    <a href="#"><img src="{{asset('front/img/icon/color_star.svg')}}" alt=""></a>
-                                    <a href="#"><img src="{{asset('front/img/icon/color_star.svg')}}" alt=""></a>
-                                    <a href="#"><img src="{{asset('front/img/icon/color_star.svg')}}" alt=""></a>
-                                    <a href="#"><img src="{{asset('front/img/icon/star.svg')}}" alt=""></a>
+                                    <a href="#"><img src="{{asset('storage/img/icon/color_star.svg')}}" alt=""></a>
+                                    <a href="#"><img src="{{asset('storage/img/icon/color_star.svg')}}" alt=""></a>
+                                    <a href="#"><img src="{{asset('storage/img/icon/color_star.svg')}}" alt=""></a>
+                                    <a href="#"><img src="{{asset('storage/img/icon/color_star.svg')}}" alt=""></a>
+                                    <a href="#"><img src="{{asset('storage/img/icon/star.svg')}}" alt=""></a>
                                 </div>
                                 <p>3.8 Ratings</p>
                             </div>
@@ -184,7 +184,7 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="learning_img">
-                    <img src="{{asset('front/img/advance_feature_img.png')}}" alt="">
+                    <img src="{{asset('storage/img/advance_feature_img.png')}}" alt="">
                 </div>
             </div>
         </div>
@@ -211,7 +211,7 @@
             <div class="col-sm-6 col-lg-4 col-xl-4">
                 <div class="single-home-blog">
                     <div class="card">
-                        <img src="{{asset('front/img/blog/blog_1.png')}}" class="card-img-top" alt="blog">
+                        <img src="{{asset('storage/img/blog/blog_1.png')}}" class="card-img-top" alt="blog">
                         <div class="card-body">
                             <a href="#" class="btn_4">Design</a>
                             <a href="blog.html">
@@ -229,7 +229,7 @@
             <div class="col-sm-6 col-lg-4 col-xl-4">
                 <div class="single-home-blog">
                     <div class="card">
-                        <img src="{{asset('front/img/blog/blog_2.png')}}" class="card-img-top" alt="blog">
+                        <img src="{{asset('storage/img/blog/blog_2.png')}}" class="card-img-top" alt="blog">
                         <div class="card-body">
                             <a href="#" class="btn_4">Developing</a>
                             <a href="blog.html">
@@ -247,7 +247,7 @@
             <div class="col-sm-6 col-lg-4 col-xl-4">
                 <div class="single-home-blog">
                     <div class="card">
-                        <img src="{{asset('front/img/blog/blog_3.png')}}" class="card-img-top" alt="blog">
+                        <img src="{{asset('storage/img/blog/blog_3.png')}}" class="card-img-top" alt="blog">
                         <div class="card-body">
                             <a href="#" class="btn_4">Design</a>
                             <a href="blog.html">

@@ -51,7 +51,7 @@
                         <li>
                             <a class="justify-content-between d-flex" href="#">
                                 <p>Available Seats </p>
-                                <span>15</span>
+                                <span>{{ $course->number_of_students }}</span>
                             </a>
                         </li>
                         <li>
@@ -62,9 +62,11 @@
                         </li>
 
                     </ul>
-                    <button type="button" class="btn_1 d-block w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    
+                    <button @if($course->number_of_students <= 0) disabled @endif type="button" class="btn_1 d-block w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         Enroll Now
                       </button>
+                      @if($course->number_of_students <= 0)<p class='text-danger'>We Apologise as all seats are Taken Please subscribe to our newsletter to get poasted</p> @endif
                       @include('front.errors')
                 </div>
 

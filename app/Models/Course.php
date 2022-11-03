@@ -9,6 +9,7 @@ class Course extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    protected $fillable = ['name','category_id','trainer_id','brief_disc','full_disc','price','image','number_of_students'];
     public function category(){
         return $this->belongsTo(Category::class);
     }
@@ -19,7 +20,7 @@ class Course extends Model
 
 
     public function students(){
-        return $this->belongsToMany(Student::class);
+        return $this->belongsToMany(Student::class,'courses_students','course_id','student_id');
     }
 
 }

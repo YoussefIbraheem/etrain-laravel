@@ -9,6 +9,7 @@
   Add Category
 </button>
 @include('front.errors')
+@include('front.success')
       </div>
       <div class="col-12">
         <table class="table table-hover">

@@ -38,8 +38,10 @@ public function category($id){
 
 public function showCourse($id){
 
-    $data['course'] = Course::select('*')->where('id',$id)->first();
-    return view('front.inc.courseDetails')->with($data);
+    $data = Course::select('*')->where('id',$id)->first();
+    // $appliedStudents = Course::join('courses_students','courses.id','=','courses_students.course_id')->where('courses_students.course_id','=',$data->id)->count();
+    // $data->update(['number_of_students'=>($data->number_of_students)]);
+    return view('front.inc.courseDetails')->with(['course'=>$data]);
 
 }
 
@@ -53,17 +55,18 @@ public function enroll(Request $request){
         'spec'=>'required|string|max:191',
         'course_id'=>'required|exists:courses,id'
     ]);
-
+    $course = Course::findOrFail($data['course_id']);
     $student = Student::create($data);
+    $course->update(['number_of_students'=>($course->number_of_students - 1)]);
     $student_id = $student->id;
-
+   
     DB::table('courses_students')->insert([
         'course_id'=>$data['course_id'],
         'student_id'=> $student_id,
         'created_at'=> now(),
         'updated_at'=>now()
     ]);
-
+   
     Mail::to($data['email'])->send(new EnrollConfirm($data));
 
     return redirect()->back();
