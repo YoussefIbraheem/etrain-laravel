@@ -8,6 +8,7 @@ use App\Models\Student;
 use App\Models\Trainer;
 use App\Models\Category;
 use App\Mail\ResponseMail;
+use App\Models\Testomnial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -325,6 +326,69 @@ class AdminController extends Controller
         $message = Message::findOrFail($id);
         Mail::to($message->email)->send(new ResponseMail($data , $message ));
         session()->flash('success',"Message Sent Successfully");
+        return redirect()->back();
+
+    }
+
+    // Testimonials
+
+    public function showTestimonials(){
+        $testimonials = Testomnial::all();
+        return view('admin.inc.testimonials')->with(['adminTestimonials'=>$testimonials]);
+    }
+
+    public function deleteTestimonial($id){
+        $testimonial = Testomnial::findOrFail($id);
+        $testimonial->delete();
+        session()->flash('success',"Testimonial Deleted Successfully");
+        return redirect()->back();
+    }
+
+    public function addTestmonial(Request $request){
+        $data = $request->validate([
+            'name'=>'required|string|max:121',
+            'desc'=>'required|string|max:121',
+            'spec'=>'required|string|max:121',
+            'image'=>'required|image'
+        ]);
+        $newImgName = $data['image']->hashName();
+        Image::make($data['image'])->resize(263,611)->save(public_path('storage/img/testimonial/'.$newImgName));
+        $data['image'] = $newImgName;
+        Testomnial::create([
+            'name'=>$data['name'],
+            'desc'=>$data['desc'],
+            'spec'=>$data['spec'],
+            'image'=>$data['image']
+        ]);
+        session()->flash('success',"Testimonial Added Successfully");
+        return redirect()->back();
+    }
+
+    public function updateTestimonial($id , Request $request){
+        $data = $request->validate([
+            'nameEdit'=>'required|string|max:121',
+            'descEdit'=>'required|string|max:121',
+            'specEdit'=>'required|string|max:121',
+            'imageEdit'=>'image|mimes:jpg,png,jpeg'
+        ]);
+        $testimonial = Testomnial::findOrFail($id);
+        if($request->has('imageEdit')){
+            Storage::delete('img/testimonial/'.$testimonial->image);
+            $newImgName = $data['imageEdit']->hashName();
+            Image::make($data['imageEdit'])->resize(263,311)->save(public_path('storage/img/testimonial/'.$newImgName));
+            $data['imageEdit'] = $newImgName;
+        }else{
+            $data['imageEdit'] = $testimonial->image;
+        }
+
+        $testimonial->update([
+            'name'=>$data['nameEdit'],
+            'desc'=>$data['descEdit'],
+            'spec'=>$data['specEdit'],
+            'image'=>$data['imageEdit']
+        ]);
+        
+        session()->flash('success',"Testimonial Updated Successfully");
         return redirect()->back();
 
     }

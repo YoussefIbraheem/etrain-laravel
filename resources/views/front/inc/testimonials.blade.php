@@ -24,7 +24,7 @@
                                 </div>
                                 <div class="col-lg-4 col-xl-2 col-sm-4">
                                     <div class="testimonial_slider_img">
-                                        <img src="{{asset("front/img/testimonial/$singleTest->image") }}" alt="#">
+                                        <img style="width:263px; height:311px;" src="{{asset("storage/img/testimonial/$singleTest->image") }}" alt="#">
                                     </div>
                                 </div>
                                 @endforeach

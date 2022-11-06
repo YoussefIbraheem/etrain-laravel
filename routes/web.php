@@ -59,6 +59,11 @@ Route::namespace('Admin')->prefix('dashboard')->group(function(){
         //MAIL
         route::get('/show_messages',[AdminController::class,'showMessages'])->name('front.admin.showMessages');
         route::post('/send_mail/{id}',[AdminController::class,'sendMail'])->name('front.admin.sendMail');
+        //Testimonials
+        route::get('/show_testimonials',[AdminController::class,'showTestimonials'])->name('front.admin.showTestimonials');
+        route::delete('/delete_testimonial/{id}',[AdminController::class,'deleteTestimonial'])->name('front.admin.deleteTestimonial');
+        route::post('/add_testimonial',[AdminController::class,'addTestmonial'])->name('front.admin.addTestimonial');
+        route::post('/update_testimonial/{id}',[AdminController::class,'updateTestimonial'])->name('front.admin.updateTestimonial');
     });
     //ADMIN LOGIN
        route::get('/login',[AdminController::class,'login'])->name('front.admin.login');

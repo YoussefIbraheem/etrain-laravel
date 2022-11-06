@@ -100,5 +100,5 @@
 <!-- member_counter counter end -->
 
 <!--::review_part start::-->
-@include('front.inc.testmonials')
+@include('front.inc.testimonials')
 @endsection

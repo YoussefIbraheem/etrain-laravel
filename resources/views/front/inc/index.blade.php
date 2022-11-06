@@ -193,7 +193,7 @@
 <!-- learning part end-->
 
 <!--::review_part start::-->
-@include('front.inc.testmonials')
+@include('front.inc.testimonials')
 <!--::blog_part end::-->
 
 <!--::blog_part start::-->

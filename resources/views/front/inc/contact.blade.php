@@ -69,9 +69,9 @@
               <button type="submit" class="button button-contactForm btn_1">Send Message</button>
             </div>
           </form>
-          @if (session()->has('success'))
+          @if (session()->has('ContactSuccess'))
                     <ul class="alert alert-success list-unstyled">
-                       <li>{{session()->get('success')}}</li> 
+                       <li>{{session()->get('ContactSuccess')}}</li> 
                     </ul>
                     @endif
                     @include('front.errors')
