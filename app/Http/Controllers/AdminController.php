@@ -8,6 +8,7 @@ use App\Models\Student;
 use App\Models\Trainer;
 use App\Models\Category;
 use App\Mail\ResponseMail;
+use App\Mail\statusEmail;
 use App\Models\Testomnial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -245,7 +246,7 @@ class AdminController extends Controller
         $data = $request->validate([
             'name'=>'required|string|max:121',
             'phone'=>'required|string|max:121',
-            'email'=>'required|string|max:121|email|unique:students,email',
+            'email'=>'required|string|max:121|email',
             'course_id'=>'required|string|max:121|exists:courses,id',
             'spec'=>'required|string|max:121',
 
@@ -286,24 +287,36 @@ class AdminController extends Controller
             [
                 'nameEdit'=>'required|string|max:121',
                 'phoneEdit'=>'required|string|max:121',
-                'emailEdit'=>'required|max:121|email|unique:students,email,'.$student->email.',email',
+                'emailEdit'=>'required|max:121|email',
                 'specEdit'=>'required|string|max:121',
-                'courseEdit'=>'required|exists:courses,id',
+                'courseEdit'=>'exists:courses,id',
                 'statusEdit'=>'required'
             ]);
+
+            $selectedCourse = Course::findOrFail($data['courseEdit']);
+
+            if($selectedCourse->number_of_students > 0){
+                $student->update([
+                    'name' =>$data['nameEdit'],
+                    'phone'=>$data['phoneEdit'],
+                    'email'=>$data['emailEdit'],
+                    'spec'=>$data['specEdit'],
+        ]);
         
-        $student->update([
-                'name' =>$data['nameEdit'],
-                'phone'=>$data['phoneEdit'],
-                'email'=>$data['emailEdit'],
-                'spec'=>$data['specEdit'],   
-    ]);
+        if($data['statusEdit']!= 'pending'){
+           Mail::to($data['emailEdit'])->send(new statusEmail($data));
+        }
+    
+        DB::table('courses_students')->where('student_id','=',$student->id)->update([
+            'course_id'=>$data['courseEdit'],'status'=>$data['statusEdit']]);
+    
+            session()->flash('success',"Student Updated Successfully");
+            return redirect()->back();
 
-    DB::table('courses_students')->where('student_id','=',$student->id)->update([
-        'course_id'=>$data['courseEdit'],'status'=>$data['statusEdit']]);
+            }else{
+                return redirect()->back()->withErrors('The selected course has no available seats');  
+            }
 
-        session()->flash('success',"Student Updated Successfully");
-        return redirect()->back();
     }
 
     public function deleteStudent($id){
@@ -317,6 +330,8 @@ class AdminController extends Controller
         $messages = Message::all();
         return view('admin.inc.messages')->with(['messages'=>$messages]);
     }
+
+   
 
     public function sendMail( Request $request, $id){
         $data = $request->validate([

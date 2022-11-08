@@ -7,8 +7,8 @@ In regards to your query:
 <br>
 <br>
 {{ $message }}
-<x-mail::button :url="''">
-Button Text
+<x-mail::button :url="'http://127.0.0.1:8000/contacts'">
+Contact Us
 </x-mail::button>
 
 Regards,<br>

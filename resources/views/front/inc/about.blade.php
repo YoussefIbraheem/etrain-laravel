@@ -32,7 +32,7 @@
             <div class="col-sm-6 col-xl-3">
                 <div class="single_feature">
                     <div class="single_feature_part">
-                        <span class="single_feature_icon"><i class="ti-layers"></i></span>
+                        <span class="single_feature_icon py-4"><i class="ti-layers"></i></span>
                         <h4>Better Future</h4>
                         <p>Set have great you male grasses yielding yielding first their to
                             called deep abundantly Set have great you male</p>
@@ -42,7 +42,7 @@
             <div class="col-sm-6 col-xl-3">
                 <div class="single_feature">
                     <div class="single_feature_part">
-                        <span class="single_feature_icon"><i class="ti-new-window"></i></span>
+                        <span class="single_feature_icon py-4"><i class="ti-new-window"></i></span>
                         <h4>Qualified Trainers</h4>
                         <p>Set have great you male grasses yielding yielding first their to called
                             deep abundantly Set have great you male</p>
@@ -52,7 +52,7 @@
             <div class="col-sm-6 col-xl-3">
                 <div class="single_feature">
                     <div class="single_feature_part single_feature_part_2">
-                        <span class="single_service_icon style_icon"><i class="ti-light-bulb"></i></span>
+                        <span class="single_service_icon style_icon py-4"><i class="ti-light-bulb"></i></span>
                         <h4>Job Oppurtunity</h4>
                         <p>Set have great you male grasses yielding yielding first their to called deep
                             abundantly Set have great you male</p>

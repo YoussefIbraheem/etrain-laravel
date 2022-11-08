@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactUs;
+use App\Mail\NewsletterMail;
 use App\Models\Course;
 use App\Models\Contact;
 use App\Models\Content;
@@ -37,7 +38,9 @@ class HomePageController extends Controller
    public function newsletter(Request $request){
       $data = $request->validate(['newsletterEmail'=>'required|email|unique:newsletters,email']);
       Newsletter::create(['email'=>$request->newsletterEmail]);
-      session()->flash('success',"email added successfully!! You will receive updates on our new courses and offers! ");
+      Mail::to($data['newsletterEmail'])->send(new NewsletterMail());
+      session()->flash('newsletterSuccess',"email added successfully!! You will receive updates on our new courses and offers! ");
+
       return redirect()->back();
    }
 

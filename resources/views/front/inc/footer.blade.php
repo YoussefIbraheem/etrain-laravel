@@ -27,9 +27,9 @@
                             </div>
                         </div>
                     </form>
-                    @if (session()->has('success'))
+                    @if (session()->has('newsletterSuccess'))
                     <ul class="alert alert-success list-unstyled">
-                       <li>{{session()->get('success')}}</li> 
+                       <li>{{session()->get('newsletterSuccess')}}</li> 
                     </ul>
                     @endif
                     @include('front.errors')

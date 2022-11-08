@@ -117,7 +117,7 @@
           <input value="{{ $student->spec }}" class="form-control my-3" type="text" name="specEdit" id="" placeholder="Student Specialty">
           @foreach ( $student->courses as $studentInfo )
             <select class="form-control my-3" name="courseEdit" id=""> 
-              <option selected hidden value="{{ $studentInfo->course_id }}">{{ $studentInfo->name }}</option>
+              <option selected hidden value="{{ $studentInfo->id }}">{{ $studentInfo->name }}</option>
               @foreach ( $showCourses as $course)
                 <option value="{{ $course->id }}">{{ $course->name }}</option>
               @endforeach
@@ -125,7 +125,7 @@
             <select class="form-control my-3" name="statusEdit" id=""> 
               <option selected hidden value="{{ $studentInfo->pivot->status }}">{{ $studentInfo->pivot->status }}</option>
                 <option value="approved">approved</option>
-                <option value="approved">rejected</option>
+                <option value="rejected">rejected</option>
             </select>
             @endforeach
         </div>

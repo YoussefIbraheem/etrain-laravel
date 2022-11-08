@@ -9,6 +9,7 @@ class Student extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    protected $fillable = ['name','email','phone','spec'];
     public function courses(){
         return $this->belongsToMany(Course::class,'courses_students')->withPivot('course_id','student_id','status');
     }

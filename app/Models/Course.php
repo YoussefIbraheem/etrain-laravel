@@ -9,7 +9,7 @@ class Course extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $fillable = ['name','category_id','trainer_id','brief_disc','full_disc','price','image','number_of_students'];
+    protected $fillable = ['name','category_id','trainer_id','brief_desc','full_desc','price','image','number_of_students'];
     public function category(){
         return $this->belongsTo(Category::class);
     }
